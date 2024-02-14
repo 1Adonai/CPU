@@ -3,6 +3,7 @@ package main
 import (
 	"monitoring/metrick"
 	"monitoring/write"
+	"monitoring/zip"
 	"time"
 )
 
@@ -13,7 +14,7 @@ func main() {
 		write.WriteinCSV(dataCPU, num_lines)
 		time.Sleep(time.Second * 5)
 		if num_lines >= 10000 {
-			write.CreatZIP()
+			zip.CreatZIP()
 		}
 	}
 }
