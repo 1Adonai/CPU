@@ -12,7 +12,7 @@ func WriteinCSV(data []string, num_lines int) {
 	var file *os.File
 	var err error
 
-	if num_lines < 10000 {
+	if num_lines < 100 {
 		file, err = os.OpenFile("data.csv", os.O_APPEND|os.O_WRONLY, 0644)
 	} else {
 		file, err = os.OpenFile("data.csv", os.O_TRUNC|os.O_WRONLY, 0644)
