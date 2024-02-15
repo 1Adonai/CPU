@@ -13,7 +13,7 @@ func main() {
 		num_lines := write.CountCsvLines()
 		write.WriteinCSV(dataCPU, num_lines)
 		time.Sleep(time.Second * 5)
-		if num_lines >= 100 {
+		if num_lines >= 10000 {
 			zip.CreatZIP()
 		}
 	}

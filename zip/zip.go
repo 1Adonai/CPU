@@ -4,28 +4,24 @@ import (
 	"compress/gzip"
 	"fmt"
 	"io"
+	"monitoring/arg"
 	"os"
-	"time"
 )
 
 func CreatZIP() {
-	now := time.Now()
-	formattedTime := now.Format("2006-01-02_15:04:05") // Форматирование по шаблону
-	archiveName := "archive_" + formattedTime + ".gz"
-	gzFile, err := os.Create(archiveName)
+	pathzip := arg.PathToFiles("zip")
+	gzFile, err := os.Create(pathzip)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-
-	// Сжимаем файл CSV
 	gzipWriter := gzip.NewWriter(gzFile)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-
-	csvFile, err := os.Open("data.csv")
+	pathdata := arg.PathToFiles("write")
+	csvFile, err := os.Open(pathdata)
 	if err != nil {
 		fmt.Println(err)
 		return

@@ -4,6 +4,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io/ioutil"
+	"monitoring/arg"
 	"os"
 	"strings"
 )
@@ -11,15 +12,15 @@ import (
 func WriteinCSV(data []string, num_lines int) {
 	var file *os.File
 	var err error
-
-	if num_lines < 100 {
-		file, err = os.OpenFile("data.csv", os.O_APPEND|os.O_WRONLY, 0644)
+	path := arg.PathToFiles("write")
+	if num_lines < 10000 {
+		file, err = os.OpenFile(path, os.O_APPEND|os.O_WRONLY, 0644)
 	} else {
-		file, err = os.OpenFile("data.csv", os.O_TRUNC|os.O_WRONLY, 0644)
+		file, err = os.OpenFile(path, os.O_TRUNC|os.O_WRONLY, 0644)
 	}
 
 	if err != nil {
-		file, err := os.Create("data.csv")
+		file, err := os.Create(path)
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -40,7 +41,8 @@ func WriteinCSV(data []string, num_lines int) {
 
 func CountCsvLines() int {
 	// Открыть файл
-	data, err := ioutil.ReadFile("data.csv")
+	path := arg.PathToFiles("write")
+	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		fmt.Println(err)
 	}
